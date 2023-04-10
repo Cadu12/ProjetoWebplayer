@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.0.5</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>br.com.projeto</groupId>
+    <artifactId>webplayer</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>com.maciejwalkowiak.paseq</groupId>
+                <artifactId>paseq-maven-plugin</artifactId>
+                <version>0.1.0</version>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <tasks>
+                                <task>
+                                    <exec>
+                                        <directory>src/main/frontend</directory>
+                                        <command>npm.cmd install</command>
+                                    </exec>
+                                </task>
+                                <task>
+                                    <exec>
+                                        <directory>src/main/frontend</directory>
+                                        <command>npm.cmd run build</command>
+                                    </exec>
+                                </task>
+                            </tasks>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>dev</id>
+                        <configuration>
+                            <tasks>
+                                <task>
+                                    <exec>
+                                        <directory>src/main/frontend</directory>
+                                        <command>npm.cmd install</command>
+                                    </exec>
+                                </task>
+                                <task>
+                                    <async>true</async>
+                                    <exec>
+                                        <directory>src/main/frontend</directory>
+                                        <command>npm.cmd run watch -- -o ../resources/static/main.css</command>
+                                    </exec>
+                                </task>
+                                <task>
+                                    <async>true</async>
+                                    <exec>
+                                        <directory>src/main/frontend</directory>
+                                        <command>npm.cmd run watch -- -o ${project.build.directory}/classes/static/main.css</command>
+                                    </exec>
+                                </task>
+                                <task>
+                                    <goals>spring-boot:run</goals>
+                                </task>
+                            </tasks>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
