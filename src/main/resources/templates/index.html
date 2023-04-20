@@ -1,25 +1,35 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
-    <head>
-        <title>WebPlayer</title>
-        <meta charset="utf-8">
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <title>WebPlayer</title>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <link th:href="@{/fontawesome/css/all.min.css}" rel="stylesheet" />
 
-        <!--<link th:href="@{/bootstrap.min.css}" rel="stylesheet" />-->
-        <script th:src="@{/tailwindcss.min.js}" type="text/javascript"></script>
-    </head>
-    <body>
-        <div class="min-h-screen bg-slate-900 p-8">
-            <ul class="divide-y divide-slate-100">
+    <script th:src="@{/tailwindcss.min.js}" type="text/javascript"></script>
+    <script th:src="@{/jquery.min.js}" type="text/javascript"></script>
+</head>
+<body>
+    <div class="min-h-screen bg-slate-900 p-8">
+        <div th:replace="~{cabecalho :: cabecalho}"></div>
+        <ul class="divide-y divide-slate-100">
+            <div th:if="${filmes.isEmpty()}">
+                <div class="flex items-start space-x-6 p-6 bg-slate-50 rounded-md border-2 justify-center text-xl">
+                    <h2>
+                        Sem filme(s) cadastro(s).
+                    </h2>
+                </div>
+            </div>
+            <div th:each="filme : ${filmes}">
                 <slot>
                     <article class="flex items-start space-x-6 p-6 bg-slate-50 rounded-md border-2">
                         <img :src="movie.image" alt="" width="60" height="88" class="flex-none rounded-md bg-slate-100 border-0" />
                         <div class="min-w-0 relative flex-auto">
                             <h2 class="font-semibold text-slate-900 truncate pr-20">{{ movie.title }}</h2>
                             <dl class="mt-2 flex flex-wrap text-sm leading-6 font-medium">
-                                <div class="absolute top-0 right-0 flex items-center space-x-1">
+                                <div th:if="${filme.isTrailer()}" class="absolute top-0 right-0 flex items-center space-x-1">
                                     <dt class="text-sky-500">
                                         <span class="sr-only">Star rating</span>
                                         <svg width="16" height="20" fill="currentColor">
@@ -54,17 +64,13 @@
                                         {{ movie.runtime }}
                                     </dd>
                                 </div>
-                                <div class="flex-none w-full mt-2 font-normal">
-                                    <dt class="sr-only">Cast</dt>
-                                    <dd class="text-slate-400">{{ movie.cast }}</dd>
-                                </div>
                             </dl>
                         </div>
                     </article>
                 </slot>
-            </ul>
-        </div>
-
-        <!--<script src="https://cdn.tailwindcss.com"></script>-->
-    </body>
+            </div>
+        </ul>
+        <div th:replace="~{rodape :: rodape}"></div>
+    </div>
+</body>
 </html>
