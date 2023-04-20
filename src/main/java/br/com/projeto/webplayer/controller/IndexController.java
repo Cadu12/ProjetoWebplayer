@@ -13,7 +13,7 @@ public class IndexController {
 
     @GetMapping("/")
     public String index(Model model) {
-        model.addAttribute("filmes", filmeService.obterFilmes());
+        model.addAttribute("filmes", filmeService.obter_filmes());
         return "index";
     }
 }

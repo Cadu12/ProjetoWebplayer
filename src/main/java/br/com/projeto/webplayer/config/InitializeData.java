@@ -1,5 +1,9 @@
 package br.com.projeto.webplayer.config;
 
+import br.com.projeto.webplayer.model.Diretor;
+import br.com.projeto.webplayer.model.Filme;
+import br.com.projeto.webplayer.service.DiretorService;
+import br.com.projeto.webplayer.service.FilmeService;
 import br.com.projeto.webplayer.service.GeneroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -10,6 +14,12 @@ import org.springframework.stereotype.Component;
 public class InitializeData {
     @Autowired
     private GeneroService generoService;
+
+    @Autowired
+    private DiretorService diretorService;
+
+    @Autowired
+    private FilmeService filmeService;
 
     @EventListener(ApplicationReadyEvent.class)
     public void onApplicationReadyEvent() {
@@ -31,5 +41,19 @@ public class InitializeData {
             generoService.salvar("ROMANCE");
             generoService.salvar("TERROR");
         }
+
+        //Diretor diretor = new Diretor();
+        //diretor.setDescricao("CARLOS OLIVEIRA");
+        //diretorService.salvar(diretor);
+
+        Diretor diretor = diretorService.procurar_por_nome("CARLOS OLIVEIRA");
+        Filme filme = new Filme();
+        filme.setDiretor(diretor);
+        filme.setTitulo("TESTE 2");
+        filme.setAno(2023);
+        filme.setTrailer(false);
+        filme.setGenero(generoService.procurar_por_nome("AÇÃO"));
+        filme.setCaminho("/caminho2.mv4");
+        filmeService.salvar(filme);
     }
 }
