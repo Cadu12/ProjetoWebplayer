@@ -17,7 +17,7 @@ public class Diretor {
     @Column(name = "ID_PK_DIRETOR", updatable = false, unique = true, nullable = false)
     private UUID id;
 
-    @Column(name = "DESCRICAO", nullable = false)
+    @Column(name = "DESCRICAO", length = 64, nullable = false)
     private String descricao;
 
     public UUID getId() {

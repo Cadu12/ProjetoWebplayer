@@ -5,6 +5,9 @@ import br.com.projeto.webplayer.repository.GeneroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.UUID;
+
 @Component
 public class GeneroService {
     @Autowired
@@ -12,6 +15,14 @@ public class GeneroService {
 
     public Genero procurar_por_nome(String descricao){
         return generoRepository.findByDescricao(descricao).orElse(null);
+    }
+
+    public Genero procurar_por_id(UUID id){
+        return generoRepository.findById(id).orElse(null);
+    }
+
+    public List<?> obter_generos(){
+        return generoRepository.findAll();
     }
 
     public Genero salvar(String descricao){

@@ -6,10 +6,7 @@ import java.util.UUID;
 
 @Entity
 @Table(
-        name = "tb_filme",
-        uniqueConstraints = {
-                @UniqueConstraint(columnNames = {"CAMINHO"}),
-        }
+        name = "tb_filme"
 )
 public class Filme {
     @Id
