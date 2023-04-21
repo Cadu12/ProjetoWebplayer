@@ -6,19 +6,40 @@
     <div th:replace="~{cabecalho :: cabecalho}"></div>
     <div th:replace="~{nav :: nav}"></div>
 
-    <div class="max-md">
+    <div class="sm:container sm:mx-auto">
         <div class="space-x-6 p-6 bg-slate-50 rounded-md border-2">
-            <form>
+            <form >
                 <label class="block">
-                    <span class="block text-sm font-medium text-slate-700">Username</span>
-                    <!-- Using form state modifiers, the classes can be identical for every input -->
-                    <input type="text" value="tbone" disabled class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
+                    <span class="block text-sm font-medium text-slate-700">Titulo</span>
+                    <input type="text" class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
       focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
       disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
       invalid:border-pink-500 invalid:text-pink-600
-      focus:invalid:border-pink-500 focus:invalid:ring-pink-500
-    "/>
+      focus:invalid:border-pink-500 focus:invalid:ring-pink-500" required/>
                 </label>
+
+                <label class="block">
+                    <span class="block text-sm font-medium text-slate-700">Ano</span>
+                    <input type="number" class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
+      focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
+      disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
+      invalid:border-pink-500 invalid:text-pink-600
+      focus:invalid:border-pink-500 focus:invalid:ring-pink-500" required/>
+                </label>
+
+                <label class="block">
+                    <span class="block text-sm font-medium text-slate-700">Diretor</span>
+                    <input type="text" class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
+      focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
+      disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
+      invalid:border-pink-500 invalid:text-pink-600
+      focus:invalid:border-pink-500 focus:invalid:ring-pink-500" required/>
+                </label>
+
+                <div class="flex space-x-2 justify-center mt-5">
+                    <button type="submit" class="px-3 py-2 bg-sky-500 text-white text-sm font-semibold rounded-md hover:bg-sky-300 border">Confirmar</button>
+                    <button type="reset" class="px-3 py-2 bg-sky-500 text-white text-sm font-semibold rounded-md hover:bg-sky-300 border">Limpar</button>
+                </div>
             </form>
         </div>
     </div>

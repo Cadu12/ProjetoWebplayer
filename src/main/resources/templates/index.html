@@ -2,7 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
 <head th:replace="~{head :: head}"></head>
 <body>
-    <div class="min-h-screen bg-slate-900 p-8">
+<div class="min-h-screen bg-slate-900 p-8">
+    <div class="sm:container sm:mx-auto">
         <div th:replace="~{cabecalho :: cabecalho}"></div>
         <div th:replace="~{nav :: nav}"></div>
         <div th:switch="${filmes.isEmpty()}">
@@ -67,8 +68,8 @@
                 </div>
             </div>
         </div>
-
-        <footer th:replace="~{rodape :: rodape}"></footer>
     </div>
+    <footer th:replace="~{rodape :: rodape}"></footer>
+</div>
 </body>
 </html>
