@@ -46,7 +46,7 @@ public class InitializeData {
         //diretor.setDescricao("CARLOS OLIVEIRA");
         //diretorService.salvar(diretor);
 
-        Diretor diretor = diretorService.procurar_por_nome("CARLOS OLIVEIRA");
+        /*Diretor diretor = diretorService.procurar_por_nome("CARLOS OLIVEIRA");
         Filme filme = new Filme();
         filme.setDiretor(diretor);
         filme.setTitulo("TESTE 2");
@@ -54,6 +54,6 @@ public class InitializeData {
         filme.setTrailer(false);
         filme.setGenero(generoService.procurar_por_nome("AÇÃO"));
         filme.setCaminho("/caminho2.mv4");
-        filmeService.salvar(filme);
+        filmeService.salvar(filme);*/
     }
 }
