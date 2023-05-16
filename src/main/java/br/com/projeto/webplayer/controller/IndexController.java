@@ -12,7 +12,7 @@ public class IndexController {
     private FilmeService filmeService;
 
     @GetMapping("/")
-    public String index(Model model) {
+    public String pagina(Model model) {
         model.addAttribute("filmes", filmeService.obter_filmes());
         return "index";
     }

@@ -1,6 +1,6 @@
 package br.com.projeto.webplayer.service;
 
-import br.com.projeto.webplayer.model.Diretor;
+import br.com.projeto.webplayer.entitiy.Diretor;
 import br.com.projeto.webplayer.repository.DiretorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

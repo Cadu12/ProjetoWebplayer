@@ -1,7 +1,5 @@
 package br.com.projeto.webplayer.config;
 
-import br.com.projeto.webplayer.model.Diretor;
-import br.com.projeto.webplayer.model.Filme;
 import br.com.projeto.webplayer.service.DiretorService;
 import br.com.projeto.webplayer.service.FilmeService;
 import br.com.projeto.webplayer.service.GeneroService;

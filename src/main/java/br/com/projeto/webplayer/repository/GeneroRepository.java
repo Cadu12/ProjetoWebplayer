@@ -1,6 +1,6 @@
 package br.com.projeto.webplayer.repository;
 
-import br.com.projeto.webplayer.model.Genero;
+import br.com.projeto.webplayer.entitiy.Genero;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

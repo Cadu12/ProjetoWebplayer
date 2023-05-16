@@ -1,6 +1,6 @@
 package br.com.projeto.webplayer.service;
 
-import br.com.projeto.webplayer.model.Genero;
+import br.com.projeto.webplayer.entitiy.Genero;
 import br.com.projeto.webplayer.repository.GeneroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

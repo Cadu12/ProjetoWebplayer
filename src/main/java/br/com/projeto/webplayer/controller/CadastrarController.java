@@ -1,7 +1,7 @@
 package br.com.projeto.webplayer.controller;
 
-import br.com.projeto.webplayer.model.Diretor;
-import br.com.projeto.webplayer.model.Filme;
+import br.com.projeto.webplayer.entitiy.Diretor;
+import br.com.projeto.webplayer.entitiy.Filme;
 import br.com.projeto.webplayer.service.DiretorService;
 import br.com.projeto.webplayer.service.FilmeService;
 import br.com.projeto.webplayer.service.GeneroService;
@@ -28,7 +28,7 @@ public class CadastrarController {
     private GeneroService generoService;
 
     @GetMapping("/cadastrar")
-    public String cadastrar(Model model) {
+    public String pagina(Model model) {
         model.addAttribute("generos", generoService.obter_generos());
         model.addAttribute("formData", new CadastrarFormData());
 
@@ -36,7 +36,7 @@ public class CadastrarController {
     }
 
     @PostMapping("/cadastrar")
-    public String cadastrar(@Valid @ModelAttribute("formData") CadastrarFormData cadastrarFormData,
+    public String cadastrar_filme(@Valid @ModelAttribute("formData") CadastrarFormData cadastrarFormData,
                             Model model) {
 
         Diretor diretor = diretorService.procurar_por_nome(cadastrarFormData.getDiretor());

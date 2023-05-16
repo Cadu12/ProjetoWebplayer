@@ -29,12 +29,6 @@
                                         <h2 class="font-semibold text-slate-900 truncate pr-20 ml-2" th:text="${filme.titulo}"></h2>
 
                                         <div class="mt-2 flex flex-wrap text-sm leading-6 font-medium ml-2">
-                                            <div th:if="${filme.isTrailer()}" class="absolute top-0 right-0 flex items-center space-x-1">
-                                                <div class="rounded-md border border-red-800 p-1 bg-red-800/25">
-                                                    TRAILER
-                                                </div>
-                                            </div>
-
                                             <div>
                                                 <div class="sr-only">Ano</div>
                                                 <div th:text="${filme.ano}"></div>

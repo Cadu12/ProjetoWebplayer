@@ -1,4 +1,4 @@
-package br.com.projeto.webplayer.model;
+package br.com.projeto.webplayer.entitiy;
 
 import jakarta.persistence.*;
 
@@ -22,9 +22,6 @@ public class Filme {
 
     @Column(name = "ANO", length = 4, nullable = false)
     private int ano;
-
-    @Column(name = "TRAILER", nullable = false)
-    private boolean trailer;
 
     @OneToOne
     @JoinColumn(name = "ID_FK_DIRETOR", referencedColumnName = "ID_PK_DIRETOR", nullable = false)
@@ -60,14 +57,6 @@ public class Filme {
 
     public void setAno(int ano) {
         this.ano = ano;
-    }
-
-    public boolean isTrailer() {
-        return trailer;
-    }
-
-    public void setTrailer(boolean trailer) {
-        this.trailer = trailer;
     }
 
     public Diretor getDiretor() {

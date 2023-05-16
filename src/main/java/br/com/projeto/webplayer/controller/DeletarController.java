@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class DeletarController {
     @GetMapping("/deletar")
-    public String deletar(Model model) {
+    public String pagina(Model model) {
         return "deletar";
     }
 }

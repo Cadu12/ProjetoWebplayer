@@ -1,4 +1,4 @@
-package br.com.projeto.webplayer.model;
+package br.com.projeto.webplayer.entitiy;
 
 import jakarta.persistence.*;
 
