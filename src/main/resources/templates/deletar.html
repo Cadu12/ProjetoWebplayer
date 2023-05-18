@@ -5,15 +5,115 @@
 <div class="min-h-screen bg-slate-900 p-8">
     <div th:replace="~{cabecalho :: cabecalho}"></div>
     <div th:replace="~{nav :: nav}"></div>
+    <div th:switch="${filmes != null && filmes.isEmpty()}">
+        <div th:case="true">
+            <div class="sm:container sm:mx-auto">
+                <div class="flex items-start space-x-6 p-6 bg-slate-50 rounded-md border-2 justify-center text-xl">
+                    <h2>
+                        Sem filme(s) cadastrado(s).
+                    </h2>
+                </div>
+            </div>
+        </div>
+        <div th:case="false">
+            <div class="sm:container sm:mx-auto">
+                <div class="space-x-6 p-6 bg-slate-50 rounded-md border-2">
+                    <div class="font-bold text-center mb-2">
+                        <div class="grid grid-cols-1 divide-y">
+                            <div th:switch="${error_mensagem != null}">
+                                <div th:case="true">
+                                    <h1 th:text="${error_mensagem}"></h1>
+                                </div>
+                                <div th:case="false">
+                                    <div th:switch="${filme == null}">
+                                        <div th:case="true">
+                                            <div class="font-bold text-center mb-2">
+                                                <h1>Escolha um filme para deletar.</h1>
+                                            </div>
 
-    <div class="sm:container sm:mx-auto">
-        <div class="space-x-6 p-6 bg-slate-50 rounded-md border-2">
-            <div class="font-bold text-center mb-2">
-                <h1>AQUI É DELETAR</h1>
+                                            <ul role="list">
+                                                <li class="group/item hover:bg-slate-200" th:each="filme : ${filmes}">
+                                                    <a th:href="${'/deletar/' + filme.id}">
+                                                        <div class="m-2 p-2">
+                                                            <div class="flex items-start">
+                                                                <img th:src="@{/teste.jpg}" alt="" width="60" height="88" class="flex-none rounded-md bg-slate-100 border-0" />
+                                                                <div class="group min-w-0 relative flex-auto">
+                                                                    <h2 class="font-semibold text-slate-900 truncate pr-20 ml-2" th:text="${filme.titulo}"></h2>
+
+                                                                    <div class="mt-2 flex flex-wrap text-sm leading-6 font-medium ml-2">
+                                                                        <div>
+                                                                            <div class="sr-only">Ano</div>
+                                                                            <div th:text="${filme.ano}"></div>
+                                                                        </div>
+
+                                                                        <div>
+                                                                            <div class="sr-only">Genero</div>
+                                                                            <div class="flex items-center">
+                                                                                <svg width="2" height="2" fill="currentColor" class="mx-2 text-slate-300" aria-hidden="true">
+                                                                                    <circle cx="1" cy="1" r="1" />
+                                                                                </svg>
+                                                                                <div th:text="${filme.genero.descricao}"></div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div>
+                                                                            <div class="sr-only">Diretor</div>
+                                                                            <div class="flex items-center">
+                                                                                <svg width="2" height="2" fill="currentColor" class="mx-2 text-slate-300" aria-hidden="true">
+                                                                                    <circle cx="1" cy="1" r="1" />
+                                                                                </svg>
+                                                                                <div th:text="${filme.diretor.descricao}"></div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div th:case="false">
+                                            <form th:object="${formData}"
+                                                  th:action="${'/deletar/' + filme.id}"
+                                                  th:method="DELETE">
+
+                                                <div>
+                                                    <h1>Titulo:</h1>
+                                                    <span th:text="*{titulo}"></span>
+                                                </div>
+
+                                                <div>
+                                                    <h1>Ano:</h1>
+                                                    <span th:text="*{ano}"></span>
+                                                </div>
+
+                                                <div>
+                                                    <h1>Genero:</h1>
+                                                    <span th:text="*{genero}"></span>
+                                                </div>
+
+                                                <div>
+                                                    <h1>Diretor:</h1>
+                                                    <span th:text="*{diretor}"></span>
+                                                </div>
+
+                                                <div class="flex space-x-2 justify-center mt-5">
+                                                    <button type="submit" class="px-3 py-2 bg-sky-500 text-white text-sm font-semibold rounded-md hover:bg-sky-300 border">Confirmar</button>
+                                                    <a th:href="@{/deletar}"><div class="px-3 py-2 bg-sky-500 text-white text-sm font-semibold rounded-md hover:bg-sky-300 border">Cancelar</div></a>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <footer th:replace="~{rodape :: rodape}"></div>
+    <footer th:replace="~{rodape :: rodape}"></footer>
 </div>
 </body>

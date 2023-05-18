@@ -24,4 +24,8 @@ public class FilmeService {
     public Filme salvar(Filme filme){
         return filmeRepository.save(filme);
     }
+
+    public void deletar(Filme filme) {
+        filmeRepository.delete(filme);
+    }
 }

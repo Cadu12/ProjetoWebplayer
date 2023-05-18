@@ -5,111 +5,123 @@
 <div class="min-h-screen bg-slate-900 p-8">
     <div th:replace="~{cabecalho :: cabecalho}"></div>
     <div th:replace="~{nav :: nav}"></div>
-
-    <div class="sm:container sm:mx-auto">
-        <div class="space-x-6 p-6 bg-slate-50 rounded-md border-2">
-            <div class="font-bold text-center mb-2">
-                <div class="grid grid-cols-1 divide-y">
-                    <div th:switch="${error_mensagem != null}">
-                        <div th:case="true">
-                            <h1 th:text="${error_mensagem}"></h1>
-                        </div>
-                        <div th:case="false">
-                            <div th:switch="${filme == null}">
+    <div th:switch="${filmes != null && filmes.isEmpty()}">
+        <div th:case="true">
+            <div class="sm:container sm:mx-auto">
+                <div class="flex items-start space-x-6 p-6 bg-slate-50 rounded-md border-2 justify-center text-xl">
+                    <h2>
+                        Sem filme(s) cadastrado(s).
+                    </h2>
+                </div>
+            </div>
+        </div>
+        <div th:case="false">
+            <div class="sm:container sm:mx-auto">
+                <div class="space-x-6 p-6 bg-slate-50 rounded-md border-2">
+                    <div class="font-bold text-center mb-2">
+                        <div class="grid grid-cols-1 divide-y">
+                            <div th:switch="${error_mensagem != null}">
                                 <div th:case="true">
-                                    <div class="font-bold text-center mb-2">
-                                        <h1>Escolha um filme para atualizar.</h1>
-                                    </div>
+                                    <h1 th:text="${error_mensagem}"></h1>
+                                </div>
+                                <div th:case="false">
+                                    <div th:switch="${filme == null}">
+                                        <div th:case="true">
+                                            <div class="font-bold text-center mb-2">
+                                                <h1>Escolha um filme para atualizar.</h1>
+                                            </div>
 
-                                    <ul role="list">
-                                        <li class="group/item hover:bg-slate-200" th:each="filme : ${filmes}">
-                                            <a th:href="${'/atualizar/' + filme.id}">
-                                                <div class="m-2 p-2">
-                                                    <div class="flex items-start">
-                                                        <img th:src="@{/teste.jpg}" alt="" width="60" height="88" class="flex-none rounded-md bg-slate-100 border-0" />
-                                                        <div class="group min-w-0 relative flex-auto">
-                                                            <h2 class="font-semibold text-slate-900 truncate pr-20 ml-2" th:text="${filme.titulo}"></h2>
+                                            <ul role="list">
+                                                <li class="group/item hover:bg-slate-200" th:each="filme : ${filmes}">
+                                                    <a th:href="${'/atualizar/' + filme.id}">
+                                                        <div class="m-2 p-2">
+                                                            <div class="flex items-start">
+                                                                <img th:src="@{/teste.jpg}" alt="" width="60" height="88" class="flex-none rounded-md bg-slate-100 border-0" />
+                                                                <div class="group min-w-0 relative flex-auto">
+                                                                    <h2 class="font-semibold text-slate-900 truncate pr-20 ml-2" th:text="${filme.titulo}"></h2>
 
-                                                            <div class="mt-2 flex flex-wrap text-sm leading-6 font-medium ml-2">
-                                                                <div>
-                                                                    <div class="sr-only">Ano</div>
-                                                                    <div th:text="${filme.ano}"></div>
-                                                                </div>
+                                                                    <div class="mt-2 flex flex-wrap text-sm leading-6 font-medium ml-2">
+                                                                        <div>
+                                                                            <div class="sr-only">Ano</div>
+                                                                            <div th:text="${filme.ano}"></div>
+                                                                        </div>
 
-                                                                <div>
-                                                                    <div class="sr-only">Genero</div>
-                                                                    <div class="flex items-center">
-                                                                        <svg width="2" height="2" fill="currentColor" class="mx-2 text-slate-300" aria-hidden="true">
-                                                                            <circle cx="1" cy="1" r="1" />
-                                                                        </svg>
-                                                                        <div th:text="${filme.genero.descricao}"></div>
-                                                                    </div>
-                                                                </div>
+                                                                        <div>
+                                                                            <div class="sr-only">Genero</div>
+                                                                            <div class="flex items-center">
+                                                                                <svg width="2" height="2" fill="currentColor" class="mx-2 text-slate-300" aria-hidden="true">
+                                                                                    <circle cx="1" cy="1" r="1" />
+                                                                                </svg>
+                                                                                <div th:text="${filme.genero.descricao}"></div>
+                                                                            </div>
+                                                                        </div>
 
-                                                                <div>
-                                                                    <div class="sr-only">Diretor</div>
-                                                                    <div class="flex items-center">
-                                                                        <svg width="2" height="2" fill="currentColor" class="mx-2 text-slate-300" aria-hidden="true">
-                                                                            <circle cx="1" cy="1" r="1" />
-                                                                        </svg>
-                                                                        <div th:text="${filme.diretor.descricao}"></div>
+                                                                        <div>
+                                                                            <div class="sr-only">Diretor</div>
+                                                                            <div class="flex items-center">
+                                                                                <svg width="2" height="2" fill="currentColor" class="mx-2 text-slate-300" aria-hidden="true">
+                                                                                    <circle cx="1" cy="1" r="1" />
+                                                                                </svg>
+                                                                                <div th:text="${filme.diretor.descricao}"></div>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div th:case="false">
-                                    <form th:object="${formData}"
-                                          th:action="${'/atualizar/' + filme.id}"
-                                          th:method="PUT">
-                                        <label class="block">
-                                            <span class="block text-sm font-medium text-slate-700">Titulo</span>
-                                            <input th:field="*{titulo}" type="text" minlength="2" class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
-      focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
-      disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
-      invalid:border-pink-500 invalid:text-pink-600
-      focus:invalid:border-pink-500 focus:invalid:ring-pink-500" required/>
-                                        </label>
-
-                                        <label class="block">
-                                            <span class="block text-sm font-medium text-slate-700">Ano</span>
-                                            <input th:field="*{ano}" type="number" min="1900" max="2099" step="1" class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
-      focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
-      disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
-      invalid:border-pink-500 invalid:text-pink-600
-      focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
-                                        </label>
-
-                                        <label class="block">
-                                            <span class="block text-sm font-medium text-slate-700">Genero</span>
-                                            <select th:field="*{genero}" class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
-      focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
-      disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
-      invalid:border-pink-500 invalid:text-pink-600
-      focus:invalid:border-pink-500 focus:invalid:ring-pink-500">
-                                                <option th:each="genero : ${generos}" th:value="${genero.id}" th:text="${genero.descricao}"></option>
-                                            </select>
-                                        </label>
-
-                                        <label class="block">
-                                            <span class="block text-sm font-medium text-slate-700">Diretor</span>
-                                            <input th:field="*{diretor}" type="text" minlength="2" class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
-      focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
-      disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
-      invalid:border-pink-500 invalid:text-pink-600
-      focus:invalid:border-pink-500 focus:invalid:ring-pink-500" required/>
-                                        </label>
-
-                                        <div class="flex space-x-2 justify-center mt-5">
-                                            <button type="submit" class="px-3 py-2 bg-sky-500 text-white text-sm font-semibold rounded-md hover:bg-sky-300 border">Confirmar</button>
-                                            <button type="reset" class="px-3 py-2 bg-sky-500 text-white text-sm font-semibold rounded-md hover:bg-sky-300 border">Limpar</button>
+                                                    </a>
+                                                </li>
+                                            </ul>
                                         </div>
-                                    </form>
+                                        <div th:case="false">
+                                            <form th:object="${formData}"
+                                                  th:action="${'/atualizar/' + filme.id}"
+                                                  th:method="PUT">
+                                                <label class="block">
+                                                    <span class="block text-sm font-medium text-slate-700">Titulo</span>
+                                                    <input th:field="*{titulo}" type="text" minlength="2" class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
+              focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
+              disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
+              invalid:border-pink-500 invalid:text-pink-600
+              focus:invalid:border-pink-500 focus:invalid:ring-pink-500" required/>
+                                                </label>
+
+                                                <label class="block">
+                                                    <span class="block text-sm font-medium text-slate-700">Ano</span>
+                                                    <input th:field="*{ano}" type="number" min="1900" max="2099" step="1" class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
+              focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
+              disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
+              invalid:border-pink-500 invalid:text-pink-600
+              focus:invalid:border-pink-500 focus:invalid:ring-pink-500" />
+                                                </label>
+
+                                                <label class="block">
+                                                    <span class="block text-sm font-medium text-slate-700">Genero</span>
+                                                    <select th:field="*{genero}" class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
+              focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
+              disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
+              invalid:border-pink-500 invalid:text-pink-600
+              focus:invalid:border-pink-500 focus:invalid:ring-pink-500">
+                                                        <option th:each="genero : ${generos}" th:value="${genero.id}" th:text="${genero.descricao}"></option>
+                                                    </select>
+                                                </label>
+
+                                                <label class="block">
+                                                    <span class="block text-sm font-medium text-slate-700">Diretor</span>
+                                                    <input th:field="*{diretor}" type="text" minlength="2" class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
+              focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
+              disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
+              invalid:border-pink-500 invalid:text-pink-600
+              focus:invalid:border-pink-500 focus:invalid:ring-pink-500" required/>
+                                                </label>
+
+                                                <div class="flex space-x-2 justify-center mt-5">
+                                                    <button type="submit" class="px-3 py-2 bg-sky-500 text-white text-sm font-semibold rounded-md hover:bg-sky-300 border">Confirmar</button>
+                                                    <button type="reset" class="px-3 py-2 bg-sky-500 text-white text-sm font-semibold rounded-md hover:bg-sky-300 border">Limpar</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
